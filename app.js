@@ -12,7 +12,6 @@ app.use(async (req, res, next) => {
   const { metod, url } = req;
   const data = moment().format('DD-MM-YYYY_hh:mm:ss');
   await fs.appendFile('./public/server.log', `\n${metod} ${url} ${data}`);
-  console.log('log quite');
   next();
 });
 app.use(morgan('tiny'));
@@ -23,7 +22,6 @@ app.use('/api/contacts', contactsRouter);
 
 app.use((_, res) => {
   res.status(404).json({ message: 'Route not found' });
-  console.log('log 404');
 });
 
 app.use((err, req, res, next) => {
