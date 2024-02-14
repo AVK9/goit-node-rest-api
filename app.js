@@ -1,26 +1,34 @@
-import express from "express";
-import morgan from "morgan";
-import cors from "cors";
+const express = require('express');
+const morgan = require('morgan');
+const cors = require('cors');
+const moment = require('moment');
+const fs = require('fs/promises');
 
-import contactsRouter from "./routes/contactsRouter.js";
+const contactsRouter = require('./routes/contactsRouter.js');
 
 const app = express();
 
-app.use(morgan("tiny"));
+app.use(async (req, res, next) => {
+  const { metod, url } = req;
+  const data = moment().format('DD-MM-YYYY_hh:mm:ss');
+  await fs.appendFile('./public/server.log', `\n${metod} ${url} ${data}`);
+  console.log('log quite');
+  next();
+});
+app.use(morgan('tiny'));
 app.use(cors());
 app.use(express.json());
 
-app.use("/api/contacts", contactsRouter);
+app.use('/api/contacts', contactsRouter);
 
 app.use((_, res) => {
-  res.status(404).json({ message: "Route not found" });
+  res.status(404).json({ message: 'Route not found' });
+  console.log('log 404');
 });
 
 app.use((err, req, res, next) => {
-  const { status = 500, message = "Server error" } = err;
+  const { status = 500, message = 'Server error' } = err;
   res.status(status).json({ message });
 });
 
-app.listen(3000, () => {
-  console.log("Server is running. Use our API on port: 3000");
-});
+module.exports = app;
