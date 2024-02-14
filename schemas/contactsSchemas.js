@@ -7,6 +7,7 @@ const createContactSchema = Joi.object({
 });
 
 const updateContactSchema = Joi.object({
+  // id: Joi.string().required(),
   name: Joi.string().required(),
   email: Joi.string().email().required(),
   phone: Joi.string().required(),

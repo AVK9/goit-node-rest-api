@@ -9,9 +9,9 @@ const contactsRouter = require('./routes/contactsRouter.js');
 const app = express();
 
 app.use(async (req, res, next) => {
-  const { metod, url } = req;
+  const { method, url } = req;
   const data = moment().format('DD-MM-YYYY_hh:mm:ss');
-  await fs.appendFile('./public/server.log', `\n${metod} ${url} ${data}`);
+  await fs.appendFile('./public/server.log', `\n${method} ${url} ${data}`);
   next();
 });
 app.use(morgan('tiny'));
