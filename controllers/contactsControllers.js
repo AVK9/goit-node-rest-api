@@ -34,8 +34,15 @@ const createContact = async (req, res) => {
 
 const updateContact = async (req, res) => {
   const { id } = req.params;
-  const result = await contactsService.updateById(id, req.body);
-  if (!result) {
+  const contactEdit = await contactsService.getContactById(id);
+  if (!Object.keys(req.body).length) {
+    throw HttpError(400, 'Body must have at least one field');
+  }
+  const updateData = await contactsService.updateById(id, req.body);
+  const concate = Object.assign(contactEdit, updateData);
+
+  const result = await contactsService.updateById(id, concate);
+  if (result === null && result === undefined) {
     throw HttpError(404, 'Not found');
   }
   res.status(201).json(result);
