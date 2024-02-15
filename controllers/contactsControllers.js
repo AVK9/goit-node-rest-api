@@ -21,7 +21,6 @@ const deleteContact = async (req, res) => {
   if (!result) {
     throw HttpError(404, 'Not found');
   }
-  // res.status(204).json({
   res.json({
     message: 'Delete success',
   });
@@ -35,10 +34,6 @@ const createContact = async (req, res) => {
 const updateContact = async (req, res) => {
   const { id } = req.params;
   const contactEdit = await contactsService.getContactById(id);
-
-  if (!Object.keys(req.body).length) {
-    throw HttpError(400, 'Body must have at least one field');
-  }
 
   if (contactEdit) {
     const concate = Object.assign(contactEdit, req.body);
