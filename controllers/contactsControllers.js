@@ -41,8 +41,7 @@ const updateContact = async (req, res) => {
   }
 
   if (contactEdit) {
-    const updateData = await contactsService.updateById(id, req.body);
-    const concate = Object.assign(contactEdit, updateData);
+    const concate = Object.assign(contactEdit, req.body);
     const result = await contactsService.updateById(id, concate);
     res.status(201).json(result);
   } else {
