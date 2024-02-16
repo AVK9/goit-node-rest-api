@@ -8,7 +8,7 @@ const contactsRouter = express.Router();
 
 contactsRouter.get('/', ctrl.getAllContacts);
 contactsRouter.get('/:id', isValId, ctrl.getOneContact);
-contactsRouter.delete('/:id', ctrl.deleteContact);
+contactsRouter.delete('/:id', isValId, ctrl.deleteContact);
 
 contactsRouter.post(
   '/',
