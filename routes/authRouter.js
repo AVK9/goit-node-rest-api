@@ -12,8 +12,8 @@ authRouter.post(
   validateBody(schemas.registerSchema),
   ctrl.register
 );
-authRouter.post('/login', validateBody(schemas.loginSchema), ctrl.login);
-authRouter.get('/current', authenticate, ctrl.getCurrent);
-authRouter.post('/logout', authenticate, ctrl.logout);
+authRouter.post('/users/login', validateBody(schemas.loginSchema), ctrl.login);
+authRouter.get('/users/current', authenticate, ctrl.getCurrent);
+authRouter.post('/users/logout', authenticate, ctrl.logout);
 
 module.exports = authRouter;
