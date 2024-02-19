@@ -380,3 +380,4 @@ GET /api/contacts/ 18-02-2024_02:55:07
 GET /api/contacts/ 18-02-2024_02:55:41
 GET /api/contacts/ 18-02-2024_02:56:10
 GET /api/contacts/ 18-02-2024_02:56:22
+POST /api/auth/login 19-02-2024_02:29:13
