@@ -472,3 +472,5 @@ PATCH /users/ 20-02-2024_12:30:48
 PATCH /users/ 20-02-2024_12:30:54
 GET /api/contacts?favorite=true 20-02-2024_01:13:48
 GET /api/contacts 20-02-2024_01:14:11
+POST /users/register 20-02-2024_06:59:16
+POST /users/register 20-02-2024_06:59:37
