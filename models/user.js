@@ -48,10 +48,15 @@ const loginSchema = Joi.object({
   password: Joi.string().required().min(6),
 });
 
+const subscriptionSchema = Joi.object({
+  subscription: Joi.string().valid('starter', 'pro', 'business').required(),
+});
+
 const User = model('user', userSchema);
 
 module.exports = {
   User,
   registerSchema,
   loginSchema,
+  subscriptionSchema,
 };
