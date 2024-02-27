@@ -1,7 +1,11 @@
 const { User } = require('../models/user.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { ctrlWrapper, HttpError } = require('../helpers/index.js');
+const {
+  ctrlWrapper,
+  HttpError,
+  userNameHandler,
+} = require('../helpers/index.js');
 const gravatar = require('gravatar');
 const path = require('path');
 const fs = require('fs/promises');
@@ -11,7 +15,7 @@ const { SECRET_KEY } = process.env;
 const avatarsDir = path.join(__dirname, '..', 'public', 'avatars');
 
 const register = async (req, res) => {
-  const { email, password } = req.body;
+  const { name, email, password } = req.body;
   const user = await User.findOne({ email });
   if (user) {
     throw HttpError(409, 'Email in use');
@@ -21,6 +25,7 @@ const register = async (req, res) => {
 
   const newUser = await User.create({
     ...req.body,
+    name: userNameHandler(name),
     password: hashPassword,
     avatarURL,
   });
