@@ -45,7 +45,10 @@ describe('POST /users/login', () => {
     expect(res.body).toEqual(
       expect.objectContaining({
         token: expect.any(String),
-        user: expect.any(Object),
+        user: expect.objectContaining({
+          email: expect.any(String),
+          subscription: expect.any(String),
+        }),
       })
     );
   }, 5000);
@@ -55,7 +58,6 @@ describe('POST /users/login', () => {
       email: 'AlexKat@example.com',
       password: 'examplepassword2',
     };
-    console.log(JSON.stringify(testData));
     const res = await request(app).post('/users/login').send(testData);
 
     expect(res.status).toBe(401);
