@@ -3,12 +3,16 @@ const morgan = require('morgan');
 const cors = require('cors');
 const moment = require('moment');
 const fs = require('fs/promises');
+const path = require('path');
 require('dotenv').config();
 
-const authRouter = require('./routes/authRouter.js');
-const contactsRouter = require('./routes/contactsRouter.js');
+const { authRouter, contactsRouter, viewRouter } = require('./routes');
 
 const app = express();
+
+// SET PUG TEMPLATE ENGINE =========
+app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, 'views'));
 
 app.use(async (req, res, next) => {
   const { method, url } = req;
@@ -23,6 +27,7 @@ app.use(express.static('public'));
 
 app.use('/users', authRouter);
 app.use('/api/contacts', contactsRouter);
+app.use('/', viewRouter);
 
 app.use((_, res) => {
   res.status(404).json({ message: 'Route not found' });
