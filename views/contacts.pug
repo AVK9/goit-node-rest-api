@@ -1,0 +1,10 @@
+extends layouts/main
+
+block content
+  h1 CONTACTS List
+  .results
+    each result in results
+      .result
+          p.owner__name= result.name
+          h3.h3= result.email
+          p.description= result.phone
