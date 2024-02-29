@@ -871,3 +871,13 @@ GET /home 27-02-2024_05:42:20
 GET /css/main.css 27-02-2024_05:42:20
 GET /contacts 27-02-2024_05:42:27
 GET /css/main.css 27-02-2024_05:42:28
+POST /users/register 29-02-2024_12:42:39
+POST /users/register 29-02-2024_12:48:48
+POST /users/register 29-02-2024_12:58:44
+POST /users/register 29-02-2024_01:26:19
+POST /users/register 29-02-2024_01:27:07
+GET /users/verify/-N0UWGcP7OzZ0lUZoDwQg 29-02-2024_01:27:48
+POST /users/register 29-02-2024_03:35:22
+GET /users/verify/MWhs8T9WOWgilbiKmEj_z 29-02-2024_03:36:40
+POST /users/login 29-02-2024_03:40:20
+POST /users/login 29-02-2024_03:41:08
