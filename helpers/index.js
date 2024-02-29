@@ -3,6 +3,7 @@ const ctrlWrapper = require('./ctrlWrapper');
 const validateBody = require('./validateBody');
 const handleMongooseError = require('./handleMongooseError');
 const userNameHandler = require('./userNameHandler');
+const sendEmail = require('./sendEmail');
 
 module.exports = {
   HttpError,
@@ -10,4 +11,5 @@ module.exports = {
   validateBody,
   handleMongooseError,
   userNameHandler,
+  sendEmail,
 };

@@ -11,6 +11,13 @@ authRouter.post(
   validateBody(schemas.registerSchema),
   ctrl.register
 );
+authRouter.get('/verify/:verificationCode', ctrl.verifyEmail);
+authRouter.get(
+  '/verify',
+  validateBody(schemas.emailSchema),
+  ctrl.resendVerifyEmail
+);
+
 authRouter.post('/login', validateBody(schemas.loginSchema), ctrl.login);
 authRouter.get('/current', authenticate, ctrl.getCurrent);
 authRouter.post('/logout', authenticate, ctrl.logout);
