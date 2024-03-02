@@ -14,7 +14,7 @@ const nodemailerConfig = {
 
 const sendEmail = async data => {
   const transport = nodemailer.createTransport(nodemailerConfig);
-  const emailBady = { ...data, from: 'Alex Katsubo <mail@alexk.site>' };
+  const emailBady = { ...data, from: 'GoIt NodeRestApi <mail@alexk.site>' };
 
   transport
     .sendMail(emailBady)

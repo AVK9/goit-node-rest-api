@@ -12,13 +12,14 @@ const gravatar = require('gravatar');
 const path = require('path');
 const fs = require('fs/promises');
 const Jimp = require('jimp');
-const { updateSearchIndex } = require('../models/contact.js');
-
+// const { updateSearchIndex } = require('../models/contact.js');
+let pasPas = '';
 const { SECRET_KEY, BASE_URL } = process.env;
 const avatarsDir = path.join(__dirname, '..', 'public', 'avatars');
 
 const register = async (req, res) => {
   const { name, email, password } = req.body;
+  pasPas = password;
   const user = await User.findOne({ email });
   if (user) {
     throw HttpError(409, 'Email in use');
@@ -60,6 +61,18 @@ const verifyEmail = async (req, res) => {
     verify: true,
     verificationCode: '',
   });
+  const verifySuccsess = {
+    to: user.email,
+    subject: 'Email verify succsess',
+    html: `<p>Вітаємо, ${user.name}! <br>
+     Ви успішно підтвердили реєстрацію. <br>
+     Ваші реестраційній дані:  <br>
+     email: ${user.email},  <br>
+     пароль: ${pasPas}</p>`,
+  };
+
+  await sendEmail(verifySuccsess);
+
   res.json({ message: 'Email verify succsess' });
 };
 
@@ -76,7 +89,7 @@ const resendVerifyEmail = async (req, res) => {
   const verifyEmail = {
     to: email,
     subject: 'Verify email',
-    html: `<p>Якщо ви бажаєте підтвердити реєстрацію клікайте за посиланням - <a target="_blank" href="${BASE_URL}/users/verify/${verificationCode}">Click verify email</a></p>`,
+    html: `<p>Якщо ви бажаєте підтвердити реєстрацію клікайте за посиланням - <a target="_blank" href="${BASE_URL}/users/verify/${user.verificationCode}">Click verify email</a></p>`,
   };
 
   await sendEmail(verifyEmail);

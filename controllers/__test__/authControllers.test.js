@@ -1,4 +1,6 @@
 const request = require('supertest');
+// const serverMain = require('../../server');
+
 const app = require('../../app');
 const {
   expect,
@@ -9,6 +11,8 @@ const {
   afterEach,
   afterAll,
 } = require('@jest/globals');
+
+// serverMain();
 
 const mongoose = require('mongoose');
 const { DB_HOST, PORT = 3000 } = process.env;
@@ -35,8 +39,8 @@ describe('POST /users/login', () => {
 
   test('test response status and token', async () => {
     const testData = {
-      email: 'AlexKat@example.com',
-      password: 'examplepassword',
+      email: 'katsubo79@gmail.com',
+      password: 'password12356',
     };
 
     const res = await request(app).post('/users/login').send(testData);
@@ -55,8 +59,8 @@ describe('POST /users/login', () => {
 
   test('should returns 401 error I', async () => {
     const testData = {
-      email: 'AlexKat@example.com',
-      password: 'examplepassword2',
+      email: 'katsubo79@gmail.com',
+      password: 'password123569',
     };
     const res = await request(app).post('/users/login').send(testData);
 
@@ -65,7 +69,7 @@ describe('POST /users/login', () => {
 
   test('should returns 400 error II', async () => {
     const testData = {
-      email: 'AlexKat@example.com',
+      email: 'katsubo79@gmail.com',
     };
 
     const res = await request(app).post('/users/login').send(testData);
